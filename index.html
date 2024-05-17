@@ -29,7 +29,7 @@
                         <img src="./img/avatar_io.jpg" alt="">
                     </div>
                     <div class="card-name d-flex align-items-center" style="width: 30%;">
-                        <h6 class="ms-1 mb-0">Francesco</h6>
+                        <h6 class="ms-1 mb-0"><strong>Francesco</strong></h6>
                     </div>
                     <div class="icons text-end d-flex align-items-center" style="width: 60%;">
                         <div class="text-end" style="width: 100%;">
@@ -64,17 +64,17 @@
                 <div class="overflow-auto">
 
                     <div @click="getUtenteCliccato(i)" v-for="elemento, i in contacts"
-                        class="card-element d-flex border-bottom">
+                        class="hover card-element d-flex border-bottom">
                         <div class="p-1" style="width: 10%;">
                             <img :src="elemento.avatar" alt="">
                         </div>
                         <div class="card-name p-2" style="width: 70%;">
-                            <h6 class="ms-1 mb-0">{{elemento.name}}</h6>
+                            <h6 class="ms-1 mb-0"><strong>{{elemento.name}}</strong></h6>
                             <p class="ms-1 mb-0 my_fs">{{ lastElement(elemento.messages).message }}</p>
                         </div>
                         <div class="icons text-end" style="width: 20%;">
                             <div class="text-end" style="width: 100%;">
-                                <span class="my_fs pe-1">12:00</span>
+                                <span class="my_fs pe-1">{{ lastElement(elemento.messages).date }}</span>
                             </div>
                         </div>
                     </div>
@@ -92,8 +92,8 @@
                         <img :src="imgClicked" alt="">
                     </div>
                     <div class="card-name p-1" style="width: 30%;">
-                        <h6 class="ms-1 mb-0">{{nameClicked}}</h6>
-                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle 12:00</p>
+                        <h6 class="ms-1 mb-0"><strong>{{nameClicked}}</strong></h6>
+                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle {{dateClicked}}</p>
                     </div>
                     <div class="icons text-end d-flex align-items-center" style="width: 64%;">
                         <div class="text-end" style="width: 100%;">
@@ -109,34 +109,45 @@
 
 
                     <!-- messaggi inviati -->
-                    <div v-if="indexClicked !== ''" v-for="persona,i in contacts[indexClicked].messages" class=" mb-2 row">
+                    <div v-if="indexClicked !== ''" v-for="persona,i in contacts[indexClicked].messages"
+                        class=" mb-2 row">
 
                         <div v-if="persona.status == 'sent'"
                             class="bg-success p-2 rounded-start rounded-top col-4 offset-8"
                             style="--bs-bg-opacity: .5;">
                             {{persona.message}}
-                            <div class="text-end my_fs">12:00</div>
+                            <div class="text-end my_fs">{{persona.date}}</div>
                         </div>
                         <div v-else="persona.status == 'recived'" class="bg-light p-2 rounded-end rounded-top col-4"
                             style="--bs-bg-opacity: .6;">
                             {{persona.message}}
-                            <div class="text-end my_fs">12:00</div>
+                            <div class="text-end my_fs">{{persona.date}}</div>
                         </div>
 
                     </div>
 
                 </div>
-                 <!-- input text messaggio -->
-                 <div class="input-message p-1">
+                <!-- input text messaggio -->
+                <div class="input-message p-1">
 
                     <div class="bg-light p-1 d-flex align-items-center">
                         <form class="d-flex" style="width: 100%;">
-                            <span><i class="p-1 fs-5 fa-regular fa-face-smile"></i></span>
-                            <input class="border border-0 form-control" type="search"
-                                placeholder="Scrivi un messaggio" aria-label="Search">
-                            <span><i class="p-1 fs-5 fa-solid fa-microphone"></i></span>
+                            <div style="width: 5%;">
+                                <span><i class="p-1 mt-1 fs-5 fa-regular fa-face-smile"></i></span>
+                            </div>
+                            <div style="width: 87%;">
+                                <input style="width: 100%;" class="border border-0 form-control" type="search"
+                                    placeholder="Scrivi un messaggio" aria-label="Search" v-model="messageInput">
+                            </div>
+                            <div style="width: 8%;">
+                                <span><i @click="sendMessage()" v-if="messageInput!==''"
+                                    class="border-hover p-1 mt-1 ms-1 fs-5 fa-regular fa-paper-plane"></i>
+                                <i class="p-1 mt-1 fs-5 fa-solid fa-microphone"></i></span>
+                            </div>
+                           
                         </form>
                     </div>
+
 
                 </div>
 
