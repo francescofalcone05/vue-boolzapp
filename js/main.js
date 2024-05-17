@@ -165,12 +165,24 @@ createApp({
             }
           ],
         }
-      ]
+      ],
+      indexClicked:'',
+      nameClicked:'',
+      imgClicked:'',
 
     }
   },
   methods: {
-
+    getUtenteCliccato(numero){
+      this.indexClicked = numero;
+      this.nameClicked= this.contacts[numero].name
+      this.imgClicked= this.contacts[numero].avatar
+      
+    },
+    lastElement(array){
+      const ultimoIndice = array.length - 1
+      return array[ultimoIndice]
+    }
   },
   mounted() {
 

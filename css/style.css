@@ -12,10 +12,6 @@ body {
     font-family: sans-serif;
 }
 
-.overflow{
-    overflow: auto;
-}
-
 .my_fs{
     font-size: 0.6rem;
 }
@@ -35,6 +31,7 @@ body {
 
 .contenitore {
     width: 80%;
+    max-width: 1210px;
     height: calc(100vh - 4rem);
     margin: 1rem auto;
     background-color:white;
@@ -43,7 +40,7 @@ body {
 .chat-container{
     background-image: url(../img/mine.jpg);
     height: calc(100vh - 10rem);
-    overflow: auto;
+    width: 100%;
 }
 
 /* .input-message{

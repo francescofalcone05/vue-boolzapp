@@ -61,15 +61,16 @@
                 </div>
 
                 <!-- lista chat contatti -->
-                <div class="overflow">
+                <div class="overflow-auto">
 
-                    <div v-for="elemento, i in contacts" class="card-element d-flex">
+                    <div @click="getUtenteCliccato(i)" v-for="elemento, i in contacts"
+                        class="card-element d-flex border-bottom">
                         <div class="p-1" style="width: 10%;">
                             <img :src="elemento.avatar" alt="">
                         </div>
                         <div class="card-name p-2" style="width: 70%;">
                             <h6 class="ms-1 mb-0">{{elemento.name}}</h6>
-                            <p class="ms-1 mb-0 my_fs">Ultimo messaggio inviato</p>
+                            <p class="ms-1 mb-0 my_fs">{{ lastElement(elemento.messages).message }}</p>
                         </div>
                         <div class="icons text-end" style="width: 20%;">
                             <div class="text-end" style="width: 100%;">
@@ -88,11 +89,11 @@
                 <!-- card chat selezionata -->
                 <div class="card-element d-flex">
                     <div class="picture p-1" style="width: 6%;">
-                        <img src="./img/avatar_io.jpg" alt="">
+                        <img :src="imgClicked" alt="">
                     </div>
                     <div class="card-name p-1" style="width: 30%;">
-                        <h6 class="ms-1 mb-0">Francesco</h6>
-                        <p class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle 12:00</p>
+                        <h6 class="ms-1 mb-0">{{nameClicked}}</h6>
+                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle 12:00</p>
                     </div>
                     <div class="icons text-end d-flex align-items-center" style="width: 64%;">
                         <div class="text-end" style="width: 100%;">
@@ -104,34 +105,35 @@
                 </div>
 
                 <!-- chat selezionata -->
-                <div class="chat-container p-5">
+                <div class="chat-container overflow-auto p-5">
+
 
                     <!-- messaggi inviati -->
-                    <div class="row">
-                        <div class="bg-success p-2 rounded-start rounded-top col-4 offset-8"  style="--bs-bg-opacity: .5;">
-                            ciao
-                        <div class="text-end my_fs">12:00</div>
-                        </div>
-                    </div>
+                    <div v-if="indexClicked !== ''" v-for="persona,i in contacts[indexClicked].messages" class=" mb-2 row">
 
-                    <!-- messaggi ricevuti -->
-                    <div class="row position-relative">
-                        <div class="bg-light p-2 rounded-end rounded-top col-4" style="--bs-bg-opacity: .6;">
-                            ciao
-                        <div class="text-end my_fs">12:00</div>
+                        <div v-if="persona.status == 'sent'"
+                            class="bg-success p-2 rounded-start rounded-top col-4 offset-8"
+                            style="--bs-bg-opacity: .5;">
+                            {{persona.message}}
+                            <div class="text-end my_fs">12:00</div>
                         </div>
+                        <div v-else="persona.status == 'recived'" class="bg-light p-2 rounded-end rounded-top col-4"
+                            style="--bs-bg-opacity: .6;">
+                            {{persona.message}}
+                            <div class="text-end my_fs">12:00</div>
+                        </div>
+
                     </div>
 
                 </div>
-
-                <!-- input text messaggio -->
-                <div class="input-message p-1">
+                 <!-- input text messaggio -->
+                 <div class="input-message p-1">
 
                     <div class="bg-light p-1 d-flex align-items-center">
                         <form class="d-flex" style="width: 100%;">
                             <span><i class="p-1 fs-5 fa-regular fa-face-smile"></i></span>
-                            <input class="border border-0 form-control" type="search" placeholder="Scrivi un messaggio"
-                                aria-label="Search">
+                            <input class="border border-0 form-control" type="search"
+                                placeholder="Scrivi un messaggio" aria-label="Search">
                             <span><i class="p-1 fs-5 fa-solid fa-microphone"></i></span>
                         </form>
                     </div>
@@ -142,9 +144,7 @@
 
         </div>
 
-    </div>
-
-    <script src="./js/main.js"></script>
+        <script src="./js/main.js"></script>
 </body>
 
 </html>
