@@ -169,10 +169,12 @@ createApp({
       indexClicked: '',
       nameClicked: '',
       imgClicked: '',
-      dateClicked:'',
+      dateClicked: '',
       messageInput: '',
-      sentMessage: '',
-      messageArray:[],
+      sentMessage: {},
+      hoursNumber: 0,
+      minutesNumber: 0,
+      messageArray: [],
 
     }
   },
@@ -181,17 +183,36 @@ createApp({
       this.indexClicked = numero;
       this.nameClicked = this.contacts[numero].name
       this.imgClicked = this.contacts[numero].avatar
-      this.messageArray = this.contacts[this.indexClicked].messages
-      this.dateClicked = this.messageArray.date
+      this.createDateRandom()
     },
     lastElement(array) {
       const ultimoIndice = array.length - 1
       return array[ultimoIndice]
     },
+    //funzione da controllare
     sendMessage() {
-      this.sentMessage = this.messageInput;
+      this.sentMessage = {
+        date: `${this.hoursNumberNumber}:${this.minutesNumber}`,
+        message: this.messageInput,
+        status: 'sent'
+      };
+      this.contacts[indexClicked].messages.push(this.sentMessage);
       this.messageInput = '';
     },
+    createDateRandom() {
+      let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
+      let hours = Math.floor(Math.random() * (23 - 0 + 1)) + 0;
+      if (hours < 9) {
+        this.hoursNumber = '0' + hours
+      } else {
+        this.hoursNumber = hours
+      }
+      if (minutes < 9) {
+        this.minutesNumber = '0' + minutes
+      } else {
+        this.minutesNumber = minutes
+      }
+    }
     // createArray() {
     //   this.messageArray = this.contacts[this.indexClicked].messages
     //   this.dateClicked = this.lastElement(messageArray).date

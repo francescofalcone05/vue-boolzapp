@@ -93,7 +93,7 @@
                     </div>
                     <div class="card-name p-1" style="width: 30%;">
                         <h6 class="ms-1 mb-0"><strong>{{nameClicked}}</strong></h6>
-                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle {{dateClicked}}</p>
+                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle {{hoursNumber}}:{{minutesNumber}}</p>
                     </div>
                     <div class="icons text-end d-flex align-items-center" style="width: 64%;">
                         <div class="text-end" style="width: 100%;">
@@ -105,8 +105,11 @@
                 </div>
 
                 <!-- chat selezionata -->
-                <div class="chat-container overflow-auto p-5">
-
+                <div class="chat-container overflow-auto p-5 position-relative">
+                    
+                    <div v-if="indexClicked !== ''" class="text-center position-absolute top-0 start-50 ">
+                        <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">mer {{hoursNumber}} mag</span>
+                    </div>
 
                     <!-- messaggi inviati -->
                     <div v-if="indexClicked !== ''" v-for="persona,i in contacts[indexClicked].messages"
