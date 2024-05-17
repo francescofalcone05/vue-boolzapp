@@ -174,49 +174,72 @@ createApp({
       sentMessage: {},
       hoursNumber: 0,
       minutesNumber: 0,
-      messageArray: [],
-
+      rispostaSettata: {},
+      //dataOggiChat: false,
+      dropDown1: false,
+      dropDown2: false,
     }
   },
   methods: {
+    dropDownMenu() {
+
+    },
+
     getUtenteCliccato(numero) {
+      this.dataOggiChat = false
       this.indexClicked = numero;
       this.nameClicked = this.contacts[numero].name
       this.imgClicked = this.contacts[numero].avatar
       this.createDateRandom()
     },
+
     lastElement(array) {
       const ultimoIndice = array.length - 1
       return array[ultimoIndice]
     },
-    //funzione da controllare
+
     sendMessage() {
+      let stopTimer = true
+      this.dataOggiChat = true
+      let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
+      let hours = Math.floor(Math.random() * (23 - 17 + 1)) + 17;
       this.sentMessage = {
-        date: `${this.hoursNumberNumber}:${this.minutesNumber}`,
+        date: `${hours}:${minutes}`,
         message: this.messageInput,
         status: 'sent'
       };
-      this.contacts[indexClicked].messages.push(this.sentMessage);
+      this.contacts[this.indexClicked].messages.push(this.sentMessage);
+      let timer = setTimeout(() => {
+        this.rispostaSettata = {
+          date: `${hours}:${minutes}`,
+          message: 'Molto bene!',
+          status: 'recived'
+        };
+        this.contacts[this.indexClicked].messages.push(this.rispostaSettata);
+        stopTimer=false
+      }, 1000);
       this.messageInput = '';
     },
+    
     createDateRandom() {
       let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
       let hours = Math.floor(Math.random() * (23 - 0 + 1)) + 0;
-      if (hours < 9) {
+      if (hours <= 9) {
         this.hoursNumber = '0' + hours
       } else {
         this.hoursNumber = hours
       }
-      if (minutes < 9) {
+      if (minutes <= 9) {
         this.minutesNumber = '0' + minutes
       } else {
         this.minutesNumber = minutes
       }
+    },
+
+    generaNumeriRandom(max1, min1,) {
+      let firstNum = Math.floor(Math.random() * (max1 - min1 + 1)) + min1;
+      return firstNum
     }
-    // createArray() {
-    //   this.messageArray = this.contacts[this.indexClicked].messages
-    //   this.dateClicked = this.lastElement(messageArray).date
-    // }
   },
   mounted() {
 

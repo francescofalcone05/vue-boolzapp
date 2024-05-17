@@ -93,7 +93,8 @@
                     </div>
                     <div class="card-name p-1" style="width: 30%;">
                         <h6 class="ms-1 mb-0"><strong>{{nameClicked}}</strong></h6>
-                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle {{hoursNumber}}:{{minutesNumber}}</p>
+                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle
+                            {{hoursNumber}}:{{minutesNumber}}</p>
                     </div>
                     <div class="icons text-end d-flex align-items-center" style="width: 64%;">
                         <div class="text-end" style="width: 100%;">
@@ -106,59 +107,95 @@
 
                 <!-- chat selezionata -->
                 <div class="chat-container overflow-auto p-5 position-relative">
-                    
+
                     <div v-if="indexClicked !== ''" class="text-center position-absolute top-0 start-50 ">
-                        <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">mer {{hoursNumber}} mag</span>
+                        <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">mer
+                            {{generaNumeriRandom(30,1)}} mag</span>
                     </div>
 
-                    <!-- messaggi inviati -->
+                    <!-- messaggi -->
                     <div v-if="indexClicked !== ''" v-for="persona,i in contacts[indexClicked].messages"
                         class=" mb-2 row">
 
-                        <div v-if="persona.status == 'sent'"
+                        <div v-if="persona.status == 'sent'" @mouseover="dropDown1 = true" @mouseleave="dropDown1 = false" 
                             class="bg-success p-2 rounded-start rounded-top col-4 offset-8"
                             style="--bs-bg-opacity: .5;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
+
+                            <!-- <div v-if="dropDown1==true" class="btn-group">
+                                <button  type="button"
+                                    class="btn dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Copia</a></li>
+                                    <li><a class="dropdown-item" href="#">Elimina messaggio</a></li>
+                                </ul>
+                            </div> -->
+
                         </div>
-                        <div v-else="persona.status == 'recived'" class="bg-light p-2 rounded-end rounded-top col-4"
+
+                        <div v-else="persona.status == 'recived'" @mouseover="dropDown2 = true"
+                            @mouseleave="dropDown2 = false" class="bg-light p-2 rounded-end rounded-top col-4"
                             style="--bs-bg-opacity: .6;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                        </div>
 
+                            <!-- <div class="btn-group">
+                                <button v-if="dropDown2==true" type="button"
+                                    class="btn dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Action</a></li>
+                                    <li><a class="dropdown-item" href="#">Another action</a></li>        
+                                </ul>
+                            </div> -->
+
+                        </div>
                     </div>
 
                 </div>
-                <!-- input text messaggio -->
-                <div class="input-message p-1">
 
-                    <div class="bg-light p-1 d-flex align-items-center">
-                        <form class="d-flex" style="width: 100%;">
-                            <div style="width: 5%;">
-                                <span><i class="p-1 mt-1 fs-5 fa-regular fa-face-smile"></i></span>
-                            </div>
-                            <div style="width: 87%;">
-                                <input style="width: 100%;" class="border border-0 form-control" type="search"
-                                    placeholder="Scrivi un messaggio" aria-label="Search" v-model="messageInput">
-                            </div>
-                            <div style="width: 8%;">
-                                <span><i @click="sendMessage()" v-if="messageInput!==''"
+
+                <!--icona al centro della chat 'oggi' 
+                        <div v-if="dataOggiChat==true" class="text-center position-absolute start-50 ">
+                        <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">oggi</span>
+                    </div> -->
+
+            
+            <!-- input text messaggio -->
+            <div class="input-message p-1">
+
+                <div class="bg-light p-1 d-flex align-items-center">
+                    <form class="d-flex" style="width: 100%;">
+                        <div style="width: 5%;">
+                            <span><i class="p-1 mt-1 fs-5 fa-regular fa-face-smile"></i></span>
+                        </div>
+                        <div style="width: 87%;">
+                            <input style="width: 100%;" class="border border-0 form-control" type="search"
+                                placeholder="Scrivi un messaggio" aria-label="Search" v-model="messageInput">
+                        </div>
+                        <div style="width: 8%;">
+                            <span><i @click="sendMessage()" v-if="messageInput!==''"
                                     class="border-hover p-1 mt-1 ms-1 fs-5 fa-regular fa-paper-plane"></i>
                                 <i class="p-1 mt-1 fs-5 fa-solid fa-microphone"></i></span>
-                            </div>
-                           
-                        </form>
-                    </div>
+                        </div>
 
-
+                    </form>
                 </div>
+
 
             </div>
 
         </div>
 
-        <script src="./js/main.js"></script>
+    </div>
+
+    <script src="./js/main.js"></script>
 </body>
 
 </html>
