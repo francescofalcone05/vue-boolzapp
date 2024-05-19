@@ -171,13 +171,14 @@ createApp({
       imgClicked: '',
       dateClicked: '',
       messageInput: '',
-      searchInput:'',
+      searchInput: '',
+      // searchBool: false,
       sentMessage: {},
-      dayRandom:0,
+      dayRandom: 0,
       hoursNumber: 0,
       minutesNumber: 0,
       rispostaSettata: {},
-      classeContatto:'',
+      classeContatto: '',
 
       //dataOggiChat: false,
       dropDown1: false,
@@ -188,16 +189,19 @@ createApp({
     dropDownMenu() {
 
     },
-//non funziona
-    findName(){
-      console.log(this.searchInput);
-      if (this.searchInput !=='') {
-        this.classeContatto = 'hide'
-        console.log(this.classeContatto);
-      } else {
-        
-      }
-    },
+    //non funziona
+    // findName() {
+
+    //   for (let index = 0; index < this.contacts.length; index++) {
+    //     const element = this.contacts[index];
+    //     //element.name.toLowerCase()
+    //     element.visible = false
+    //     this.searchBool = this.element.name.includes(this.searchInput)
+    //     if (this.searchBool==true) {
+    //       element.visible=true
+    //     }
+    //   }
+    // },
 
     getUtenteCliccato(numero) {
       this.dataOggiChat = false
@@ -240,28 +244,39 @@ createApp({
           status: 'recived'
         };
         this.contacts[this.indexClicked].messages.push(this.rispostaSettata);
-        stopTimer=false
+        stopTimer = false
       }, 1000);
       this.messageInput = '';
     },
-    
+
     createDateRandom() {
       let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
       let hours = Math.floor(Math.random() * (23 - 0 + 1)) + 0;
       let dayNum = Math.floor(Math.random() * (30 - 1 + 1)) + 1;
       this.dayRandom = dayNum
       if (hours <= 9) {
-        this.hoursNumber = '0' + hours
+        hours = '0' + hours
       } else {
-        this.hoursNumber = hours
+        hours = hours
       }
       if (minutes <= 9) {
-        this.minutesNumber = '0' + minutes
+        minutes = '0' + minutes
       } else {
-        this.minutesNumber = minutes
+        minutes = minutes
       }
+      this.hoursNumber = hours
+      this.minutesNumber = minutes
     },
   },
+
+  computed: {
+    filtraContatti: function () {
+      return this.contacts.filter((elemento) =>{
+        return elemento.name.toLowerCase().match(this.searchInput)
+      })
+    }
+  },
+
   mounted() {
 
   }
