@@ -16,10 +16,6 @@ body {
     background-color: rgb(153, 147, 147);
 }
 
-.border-hover:hover{
-    border:0.1px solid grey;
-    border-radius: 50%;
-}
 .my_fs{
     font-size: 0.6rem;
 }
@@ -28,6 +24,16 @@ body {
     font-size: 0.8rem;
 }
 
+.hide{
+    display: none;
+}
+
+.unset{
+    display: unset;
+}
+.c-gray{
+    color: gray;
+}
 
 /************* HEADER *************/
 
@@ -77,6 +83,10 @@ img {
 
 i{
     color: gray;
+}
+
+i:hover{
+    color: green;
 }
 
 .icona-notifiche{

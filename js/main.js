@@ -171,10 +171,14 @@ createApp({
       imgClicked: '',
       dateClicked: '',
       messageInput: '',
+      searchInput:'',
       sentMessage: {},
+      dayRandom:0,
       hoursNumber: 0,
       minutesNumber: 0,
       rispostaSettata: {},
+      classeContatto:'',
+
       //dataOggiChat: false,
       dropDown1: false,
       dropDown2: false,
@@ -183,6 +187,16 @@ createApp({
   methods: {
     dropDownMenu() {
 
+    },
+//non funziona
+    findName(){
+      console.log(this.searchInput);
+      if (this.searchInput !=='') {
+        this.classeContatto = 'hide'
+        console.log(this.classeContatto);
+      } else {
+        
+      }
     },
 
     getUtenteCliccato(numero) {
@@ -203,6 +217,16 @@ createApp({
       this.dataOggiChat = true
       let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
       let hours = Math.floor(Math.random() * (23 - 17 + 1)) + 17;
+      if (hours <= 9) {
+        hours = '0' + hours
+      } else {
+        hours = hours
+      }
+      if (minutes <= 9) {
+        minutes = '0' + minutes
+      } else {
+        minutes = minutes
+      }
       this.sentMessage = {
         date: `${hours}:${minutes}`,
         message: this.messageInput,
@@ -224,6 +248,8 @@ createApp({
     createDateRandom() {
       let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
       let hours = Math.floor(Math.random() * (23 - 0 + 1)) + 0;
+      let dayNum = Math.floor(Math.random() * (30 - 1 + 1)) + 1;
+      this.dayRandom = dayNum
       if (hours <= 9) {
         this.hoursNumber = '0' + hours
       } else {
@@ -235,11 +261,6 @@ createApp({
         this.minutesNumber = minutes
       }
     },
-
-    generaNumeriRandom(max1, min1,) {
-      let firstNum = Math.floor(Math.random() * (max1 - min1 + 1)) + min1;
-      return firstNum
-    }
   },
   mounted() {
 

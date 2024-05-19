@@ -54,8 +54,8 @@
                 <!-- barra 'cerca' -->
                 <div class="bg-light p-1">
                     <form class="d-flex" style="width: 100%;" role="search">
-                        <span><i class="p-1 fs-5 fa-solid fa-magnifying-glass"></i></span>
-                        <input class="border border-0 form-control" type="search"
+                        <span @click="findName()"><i class="p-1 fs-5 fa-solid fa-magnifying-glass"></i></span>
+                        <input v-model="searchInput" class="border border-0 form-control" type="search"
                             placeholder="Cerca o inizia una nuova chat" aria-label="Search">
                     </form>
                 </div>
@@ -63,18 +63,19 @@
                 <!-- lista chat contatti -->
                 <div class="overflow-auto">
 
-                    <div @click="getUtenteCliccato(i)" v-for="elemento, i in contacts"
+                    <!-- la classe hide non funziona  -->
+                    <div :class="classeContatto" @click="getUtenteCliccato(i)" v-for="elemento, i in contacts"
                         class="hover card-element d-flex border-bottom">
                         <div class="p-1" style="width: 10%;">
                             <img :src="elemento.avatar" alt="">
                         </div>
                         <div class="card-name p-2" style="width: 70%;">
                             <h6 class="ms-1 mb-0"><strong>{{elemento.name}}</strong></h6>
-                            <p class="ms-1 mb-0 my_fs">{{ lastElement(elemento.messages).message }}</p>
+                            <p class="c-gray ms-1 mb-0 my_fs">{{ lastElement(elemento.messages).message }}</p>
                         </div>
                         <div class="icons text-end" style="width: 20%;">
                             <div class="text-end" style="width: 100%;">
-                                <span class="my_fs pe-1">{{ lastElement(elemento.messages).date }}</span>
+                                <span class="c-gray my_fs pe-1">{{ lastElement(elemento.messages).date }}</span>
                             </div>
                         </div>
                     </div>
@@ -110,7 +111,7 @@
 
                     <div v-if="indexClicked !== ''" class="text-center position-absolute top-0 start-50 ">
                         <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">mer
-                            {{generaNumeriRandom(30,1)}} mag</span>
+                            {{dayRandom}} mag</span>
                     </div>
 
                     <!-- messaggi -->
@@ -181,7 +182,7 @@
                         </div>
                         <div style="width: 8%;">
                             <span><i @click="sendMessage()" v-if="messageInput!==''"
-                                    class="border-hover p-1 mt-1 ms-1 fs-5 fa-regular fa-paper-plane"></i>
+                                    class="p-1 mt-1 ms-1 fs-5 fa-regular fa-paper-plane"></i>
                                 <i class="p-1 mt-1 fs-5 fa-solid fa-microphone"></i></span>
                         </div>
 
