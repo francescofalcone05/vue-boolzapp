@@ -233,8 +233,16 @@ createApp({
       // console.log(this.time);
       return time
     },
+
     resetIndex(){
       this.indexClicked = '';
+    },
+
+    faiCose(index){
+      let elemento = this.filtraContatti[index].messages
+      let ultimoMsg = elemento[elemento.length-1]
+      this.elemento.splice(ultimoMsg, 1)
+      
     }
   },
 
