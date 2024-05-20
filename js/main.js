@@ -172,74 +172,40 @@ createApp({
       dateClicked: '',
       messageInput: '',
       searchInput: '',
-      // searchBool: false,
       sentMessage: {},
-      dayRandom: 0,
-      hoursNumber: 0,
-      minutesNumber: 0,
       rispostaSettata: {},
-      classeContatto: '',
-
-      //dataOggiChat: false,
-      dropDown1: false,
-      dropDown2: false,
+      // dropDown1: false,
+      // dropDown2: false,
     }
   },
   methods: {
-    dropDownMenu() {
-
-    },
-    //non funziona
-    // findName() {
-
-    //   for (let index = 0; index < this.contacts.length; index++) {
-    //     const element = this.contacts[index];
-    //     //element.name.toLowerCase()
-    //     element.visible = false
-    //     this.searchBool = this.element.name.includes(this.searchInput)
-    //     if (this.searchBool==true) {
-    //       element.visible=true
-    //     }
-    //   }
+    // dropDownMenu() {
     // },
 
     getUtenteCliccato(numero) {
-      this.dataOggiChat = false
+      this.dataOggiChat = false;
       this.indexClicked = numero;
-      this.nameClicked = this.contacts[numero].name
-      this.imgClicked = this.contacts[numero].avatar
-      this.createDateRandom()
+      this.nameClicked = this.contacts[numero].name;
+      this.imgClicked = this.contacts[numero].avatar;
     },
 
     lastElement(array) {
-      const ultimoIndice = array.length - 1
+      const ultimoIndice = array.length - 1;
       return array[ultimoIndice]
     },
 
     sendMessage() {
       let stopTimer = true
       this.dataOggiChat = true
-      let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
-      let hours = Math.floor(Math.random() * (23 - 17 + 1)) + 17;
-      if (hours <= 9) {
-        hours = '0' + hours
-      } else {
-        hours = hours
-      }
-      if (minutes <= 9) {
-        minutes = '0' + minutes
-      } else {
-        minutes = minutes
-      }
       this.sentMessage = {
-        date: `${hours}:${minutes}`,
+        date: this.getCurrentTime(),
         message: this.messageInput,
         status: 'sent'
       };
       this.contacts[this.indexClicked].messages.push(this.sentMessage);
       let timer = setTimeout(() => {
         this.rispostaSettata = {
-          date: `${hours}:${minutes}`,
+          date: this.getCurrentTime(),
           message: 'Molto bene!',
           status: 'recived'
         };
@@ -249,29 +215,29 @@ createApp({
       this.messageInput = '';
     },
 
-    createDateRandom() {
-      let minutes = Math.floor(Math.random() * (59 - 0 + 1)) + 0;
-      let hours = Math.floor(Math.random() * (23 - 0 + 1)) + 0;
-      let dayNum = Math.floor(Math.random() * (30 - 1 + 1)) + 1;
-      this.dayRandom = dayNum
+    getCurrentTime() {
+      const today = new Date();
+      let hours = today.getHours();
+      let minutes = today.getMinutes();
       if (hours <= 9) {
         hours = '0' + hours
       } else {
         hours = hours
-      }
+      };
       if (minutes <= 9) {
         minutes = '0' + minutes
       } else {
         minutes = minutes
-      }
-      this.hoursNumber = hours
-      this.minutesNumber = minutes
+      };
+      let time = hours + ":" + minutes;
+      // console.log(this.time);
+      return time
     },
   },
 
   computed: {
     filtraContatti: function () {
-      return this.contacts.filter((elemento) =>{
+      return this.contacts.filter((elemento) => {
         return elemento.name.toLowerCase().match(this.searchInput)
       })
     }
