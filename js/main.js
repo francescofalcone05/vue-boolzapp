@@ -174,13 +174,9 @@ createApp({
       searchInput: '',
       sentMessage: {},
       rispostaSettata: {},
-      // dropDown1: false,
-      // dropDown2: false,
     }
   },
   methods: {
-    // dropDownMenu() {
-    // },
 
     getUtenteCliccato(numero) {
       this.dataOggiChat = false;

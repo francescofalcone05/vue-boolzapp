@@ -58,8 +58,8 @@
                 <div class="bg-light p-1">
                     <form class="d-flex" style="width: 100%;" role="search">
                         <span><i class="p-1 fs-5 fa-solid fa-magnifying-glass"></i></span>
-                        <input @input="resetIndex()" v-model="searchInput" class="border border-0 form-control" type="search"
-                            placeholder="Cerca o inizia una nuova chat" aria-label="Search">
+                        <input @input="resetIndex()" v-model="searchInput" class="border border-0 form-control"
+                            type="search" placeholder="Cerca o inizia una nuova chat" aria-label="Search">
                     </form>
                 </div>
 
@@ -75,11 +75,13 @@
                             </div>
                             <div class="card-name p-2" style="width: 70%;">
                                 <h6 class="ms-1 mb-0"><strong>{{elemento.name}}</strong></h6>
-                                <p class="c-gray ms-1 mb-0 my_fs">{{ lastElement(elemento.messages).message }}</p>
+                                <p v-if="lastElement(elemento.messages) !== undefined" class="c-gray ms-1 mb-0 my_fs">{{
+                                    lastElement(elemento.messages).message }}</p>
                             </div>
                             <div class="icons text-end" style="width: 20%;">
                                 <div class="text-end" style="width: 100%;">
-                                    <span class="c-gray my_fs pe-1">{{ lastElement(elemento.messages).date }}</span>
+                                    <span v-if="lastElement(elemento.messages) !== undefined"
+                                        class="c-gray my_fs pe-1">{{ lastElement(elemento.messages).date }}</span>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +113,7 @@
                                 <i class="mx-2 fa-solid fa-ellipsis-vertical"></i>
                             </div>
                         </div>
-                    </template>                  
+                    </template>
                 </div>
 
                 <!-- chat selezionata -->
@@ -126,57 +128,23 @@
                     <div v-if="indexClicked !== ''" v-for="persona,i in filtraContatti[indexClicked].messages"
                         class=" mb-2 row">
 
-                        <div @click="cancellaMsg(indexClicked)" v-if="persona.status == 'sent'" @mouseover="dropDown1 = true"
-                            @mouseleave="dropDown1 = false"
+                        <div @click="cancellaMsg(indexClicked, i)" v-if="persona.status == 'sent'"
+                            @mouseover="dropDown1 = true" @mouseleave="dropDown1 = false"
                             class="bg-success p-2 rounded-start rounded-top col-4 offset-8"
                             style="--bs-bg-opacity: .5;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-
-                            <!-- <div v-if="dropDown1==true" class="btn-group">
-                                <button  type="button"
-                                    class="btn dropdown-toggle dropdown-toggle-split"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Copia</a></li>
-                                    <li><a class="dropdown-item" href="#">Elimina messaggio</a></li>
-                                </ul>
-                            </div> -->
-
                         </div>
 
-                        <div @click="cancellaMsg(indexClicked)" v-else="persona.status == 'recived'" @mouseover="dropDown2 = true"
-                            @mouseleave="dropDown2 = false" class="bg-light p-2 rounded-end rounded-top col-4"
-                            style="--bs-bg-opacity: .6;">
+                        <div @click="cancellaMsg(indexClicked, i)" v-else="persona.status == 'recived'"
+                            @mouseover="dropDown2 = true" @mouseleave="dropDown2 = false"
+                            class="bg-light p-2 rounded-end rounded-top col-4" style="--bs-bg-opacity: .6;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                            <!-- 
-                            <div class="btn-group">
-                                <button v-if="dropDown2==true" type="button"
-                                    class="btn dropdown-toggle dropdown-toggle-split"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    <span class="visually-hidden">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>        
-                                </ul>
-                            </div> -->
-
                         </div>
                     </div>
 
                 </div>
-
-
-                <!-- icona al centro della chat 'oggi' 
-                        <div v-if="dataOggiChat==true" class="text-center position-absolute start-50 ">
-                        <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">oggi</span>
-                    </div> -->
-
-
                 <!-- input text messaggio -->
                 <div class="input-message p-1">
 
@@ -192,7 +160,8 @@
                             <div class="text-end" style="width: 8%;">
                                 <span><i @click="sendMessage()" v-if="messageInput!==''"
                                         class="p-1 mt-1 ms-1 fs-5 fa-regular fa-paper-plane"></i>
-                                    <i @click="getCurrentTime()" class="p-1 mt-1 fs-5 fa-solid fa-microphone"></i></span>
+                                    <i @click="getCurrentTime()"
+                                        class="p-1 mt-1 fs-5 fa-solid fa-microphone"></i></span>
                             </div>
 
                         </form>
