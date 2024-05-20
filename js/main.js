@@ -238,11 +238,13 @@ createApp({
       this.indexClicked = '';
     },
 
-    faiCose(index){
-      let elemento = this.filtraContatti[index].messages
-      let ultimoMsg = elemento[elemento.length-1]
-      this.elemento.splice(ultimoMsg, 1)
-      
+    faiCose(index,indice){
+      let elemento = this.filtraContatti[index].messages;
+      if (indice==undefined) {
+        indice = 1
+      }
+      elemento.splice(indice,1)
+      console.log(indice , elemento);
     }
   },
 
