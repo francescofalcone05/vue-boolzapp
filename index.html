@@ -126,7 +126,7 @@
                     <div v-if="indexClicked !== ''" v-for="persona,i in filtraContatti[indexClicked].messages"
                         class=" mb-2 row">
 
-                        <div @click="faiCose(indexClicked, i)" v-if="persona.status == 'sent'" @mouseover="dropDown1 = true"
+                        <div @click="cancellaMsg(indexClicked)" v-if="persona.status == 'sent'" @mouseover="dropDown1 = true"
                             @mouseleave="dropDown1 = false"
                             class="bg-success p-2 rounded-start rounded-top col-4 offset-8"
                             style="--bs-bg-opacity: .5;">
@@ -147,7 +147,7 @@
 
                         </div>
 
-                        <div @click="faiCose(indexClicked)" v-else="persona.status == 'recived'" @mouseover="dropDown2 = true"
+                        <div @click="cancellaMsg(indexClicked)" v-else="persona.status == 'recived'" @mouseover="dropDown2 = true"
                             @mouseleave="dropDown2 = false" class="bg-light p-2 rounded-end rounded-top col-4"
                             style="--bs-bg-opacity: .6;">
                             {{persona.message}}

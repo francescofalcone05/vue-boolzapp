@@ -238,10 +238,12 @@ createApp({
       this.indexClicked = '';
     },
 
-    faiCose(index,indice){
+    cancellaMsg(index,indice){
       let elemento = this.filtraContatti[index].messages;
       if (indice==undefined) {
         indice = 1
+      }else if (indice==0){
+        indice = 0
       }
       elemento.splice(indice,1)
       console.log(indice , elemento);
