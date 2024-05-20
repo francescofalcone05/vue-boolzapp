@@ -174,15 +174,25 @@ createApp({
       searchInput: '',
       sentMessage: {},
       rispostaSettata: {},
+      hideOrShowList:'',
+      hideOrShowChat:'hide',
+
     }
   },
   methods: {
+
+    backToTheChat(){
+      this.hideOrShowList = ''
+      this.hideOrShowChat = 'hide'
+    },
 
     getUtenteCliccato(numero) {
       this.dataOggiChat = false;
       this.indexClicked = numero;
       this.nameClicked = this.filtraContatti[numero].name;
       this.imgClicked = this.filtraContatti[numero].avatar;
+      this.hideOrShowList = 'hide'
+      this.hideOrShowChat = ''
     },
 
     lastElement(array) {
