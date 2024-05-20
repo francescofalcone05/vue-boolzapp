@@ -233,7 +233,7 @@ createApp({
       // console.log(this.time);
       return time
     },
-    accrocchio(){
+    resetIndex(){
       this.indexClicked = '';
     }
   },
