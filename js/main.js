@@ -185,8 +185,8 @@ createApp({
     getUtenteCliccato(numero) {
       this.dataOggiChat = false;
       this.indexClicked = numero;
-      this.nameClicked = this.contacts[numero].name;
-      this.imgClicked = this.contacts[numero].avatar;
+      this.nameClicked = this.filtraContatti[numero].name;
+      this.imgClicked = this.filtraContatti[numero].avatar;
     },
 
     lastElement(array) {
@@ -233,6 +233,9 @@ createApp({
       // console.log(this.time);
       return time
     },
+    accrocchio(){
+      this.indexClicked = '';
+    }
   },
 
   computed: {

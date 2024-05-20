@@ -58,7 +58,7 @@
                 <div class="bg-light p-1">
                     <form class="d-flex" style="width: 100%;" role="search">
                         <span><i class="p-1 fs-5 fa-solid fa-magnifying-glass"></i></span>
-                        <input v-model="searchInput" class="border border-0 form-control" type="search"
+                        <input @input="accrocchio()" v-model="searchInput" class="border border-0 form-control" type="search"
                             placeholder="Cerca o inizia una nuova chat" aria-label="Search">
                     </form>
                 </div>
@@ -95,21 +95,23 @@
 
                 <!-- card chat selezionata -->
                 <div class="card-element d-flex">
-                    <div class="picture p-1" style="width: 6%;">
-                        <img :src="imgClicked" alt="">
-                    </div>
-                    <div class="card-name p-1" style="width: 30%;">
-                        <h6 class="ms-1 mb-0"><strong>{{nameClicked}}</strong></h6>
-                        <p v-if="nameClicked !== ''" class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle
-                            {{getCurrentTime()}}</p>
-                    </div>
-                    <div class="icons text-end d-flex align-items-center" style="width: 64%;">
-                        <div class="text-end" style="width: 100%;">
-                            <i class="mx-2 fa-solid fa-circle-notch"></i>
-                            <i class="mx-2 fa-solid fa-message"></i>
-                            <i class="mx-2 fa-solid fa-ellipsis-vertical"></i>
+                    <template v-if="indexClicked !== ''">
+                        <div class="picture p-1" style="width: 6%;">
+                            <img :src="imgClicked" alt="">
                         </div>
-                    </div>
+                        <div class="card-name p-1" style="width: 30%;">
+                            <h6 class="ms-1 mb-0"><strong>{{nameClicked}}</strong></h6>
+                            <p class="ms-1 mb-0 my_fs">Ultimo accesso oggi alle
+                                {{getCurrentTime()}}</p>
+                        </div>
+                        <div class="icons text-end d-flex align-items-center" style="width: 64%;">
+                            <div class="text-end" style="width: 100%;">
+                                <i class="mx-2 fa-solid fa-circle-notch"></i>
+                                <i class="mx-2 fa-solid fa-message"></i>
+                                <i class="mx-2 fa-solid fa-ellipsis-vertical"></i>
+                            </div>
+                        </div>
+                    </template>                  
                 </div>
 
                 <!-- chat selezionata -->
@@ -121,7 +123,7 @@
                     </div>
 
                     <!-- messaggi -->
-                    <div v-if="indexClicked !== ''" v-for="persona,i in contacts[indexClicked].messages"
+                    <div v-if="indexClicked !== ''" v-for="persona,i in filtraContatti[indexClicked].messages"
                         class=" mb-2 row">
 
                         <div v-if="persona.status == 'sent'" @mouseover="dropDown1 = true"
