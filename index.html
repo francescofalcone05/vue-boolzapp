@@ -135,7 +135,7 @@
                             style="--bs-bg-opacity: .5;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                            <span @click="cancellaMsg(indexClicked, i)" v-if="deleteMsgSentVisibility==true" class="deleteMsgRight rounded p-1 bg-light">elimina messaggio</span>
+                            <span  v-if="deleteMsgSentVisibility==true" class="deleteMsgRight rounded p-1 bg-light"><span @click="cancellaMsg(indexClicked, i)">elimina</span><br><span class="border-top" @click="deleteMsgSentVisibility=false">annulla</span></span>
                         </div>
 
                         <div v-else="persona.status == 'recived'"
@@ -143,7 +143,7 @@
                             class="position-relative bg-light p-2 rounded-end rounded-top col-6 col-md-4" style="--bs-bg-opacity: .6;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                            <span @click="cancellaMsg(indexClicked, i)" v-if="deleteMsgRecivedVisibility==true" class="deleteMsgLeft rounded p-1 bg-light">elimina messaggio</span>
+                            <span v-if="deleteMsgRecivedVisibility==true" class="deleteMsgLeft rounded p-1 bg-light"><span @click="cancellaMsg(indexClicked, i)">elimina</span><br><span class="border-top" @click="deleteMsgRecivedVisibility=false">annulla</span></span>
                         </div>
                     </div>
 

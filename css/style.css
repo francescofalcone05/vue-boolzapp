@@ -131,14 +131,14 @@ i:hover{
     position: absolute;
     top: 100%;
     right: 100%;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
 }
 
 .deleteMsgLeft{
     position: absolute;
     top: 100%;
     left: 100%;
-    font-size: 0.5rem;
+    font-size: 0.7rem;
 }
 
 
