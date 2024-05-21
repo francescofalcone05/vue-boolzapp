@@ -176,6 +176,8 @@ createApp({
       rispostaSettata: {},
       hideOrShowList:'',
       hideOrShowChat:'hide',
+      deleteMsgSentVisibility: false,
+      deleteMsgRecivedVisibility:false
 
     }
   },
@@ -252,7 +254,9 @@ createApp({
         indice = 0
       }
       elemento.splice(indice,1)
-      console.log(indice , elemento);
+      this.deleteMsgSentVisibility= false
+      this.deleteMsgRecivedVisibility= false
+
     }
   },
 

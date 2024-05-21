@@ -129,19 +129,21 @@
                     <div v-if="indexClicked !== ''" v-for="persona,i in filtraContatti[indexClicked].messages"
                         class=" mb-2 row">
 
-                        <div @click="cancellaMsg(indexClicked, i)" v-if="persona.status == 'sent'"
-                            @mouseover="dropDown1 = true" @mouseleave="dropDown1 = false"
-                            class="bg-success p-2 rounded-start rounded-top col-6 offset-6 col-md-4 offset-md-8"
+                        <div  v-if="persona.status == 'sent'"
+                            @mouseover="deleteMsgSentVisibility=true"
+                            class="position-relative bg-success p-2 rounded-start rounded-top col-6 offset-6 col-md-4 offset-md-8"
                             style="--bs-bg-opacity: .5;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
+                            <span @click="cancellaMsg(indexClicked, i)" v-if="deleteMsgSentVisibility==true" class="deleteMsg rounded p-1 bg-light">cancella messaggio</span>
                         </div>
 
-                        <div @click="cancellaMsg(indexClicked, i)" v-else="persona.status == 'recived'"
-                            @mouseover="dropDown2 = true" @mouseleave="dropDown2 = false"
-                            class="bg-light p-2 rounded-end rounded-top col-6 col-md-4" style="--bs-bg-opacity: .6;">
+                        <div v-else="persona.status == 'recived'"
+                            @mouseover="deleteMsgRecivedVisibility=true" 
+                            class="position-relative bg-light p-2 rounded-end rounded-top col-6 col-md-4" style="--bs-bg-opacity: .6;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
+                            <span @click="cancellaMsg(indexClicked, i)" v-if="deleteMsgRecivedVisibility==true" class="deleteMsg rounded p-1 bg-light">cancella messaggio</span>
                         </div>
                     </div>
 

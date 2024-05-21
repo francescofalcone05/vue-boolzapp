@@ -127,6 +127,14 @@ i:hover{
     width: 8%;
 }
 
+.deleteMsg{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    font-size: 0.5rem;
+    
+}
+
 
 /************* FOOTER *************/
 
