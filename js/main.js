@@ -174,16 +174,24 @@ createApp({
       searchInput: '',
       sentMessage: {},
       rispostaSettata: {},
-      hideOrShowList:'',
-      hideOrShowChat:'hide',
-      deleteMsgSentVisibility: false,
-      deleteMsgRecivedVisibility:false
+      hideOrShowList: '',
+      hideOrShowChat: 'hide',
+      deleteMsgSentVisibility: null,
+      deleteMsgRecivedVisibility: null
 
     }
   },
   methods: {
 
-    backToTheChat(){
+    showDelete(indice) {
+      if (this.deleteMsgSentVisibility == indice) {
+        this.deleteMsgSentVisibility
+      } else {
+        this.deleteMsgSentVisibility = indice
+      }
+    },
+
+    backToTheChat() {
       this.hideOrShowList = ''
       this.hideOrShowChat = 'hide'
     },
@@ -242,20 +250,20 @@ createApp({
       return time
     },
 
-    resetIndex(){
+    resetIndex() {
       this.indexClicked = '';
     },
 
-    cancellaMsg(index,indice){
+    cancellaMsg(index, indice) {
       let elemento = this.filtraContatti[index].messages;
-      if (indice==undefined) {
+      if (indice == undefined) {
         indice = 1
-      }else if (indice==0){
+      } else if (indice == 0) {
         indice = 0
       }
-      elemento.splice(indice,1)
-      this.deleteMsgSentVisibility= false
-      this.deleteMsgRecivedVisibility= false
+      elemento.splice(indice, 1)
+      this.deleteMsgSentVisibility = false
+      this.deleteMsgRecivedVisibility = false
 
     }
   },

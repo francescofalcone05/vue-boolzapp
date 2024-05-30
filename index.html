@@ -24,7 +24,7 @@
         <div class="contenitore d-flex">
 
             <!-- CONTENITORE DI SINISTRA -->
-            <div class="left-side d-md-block" :class="hideOrShowList" >
+            <div class="left-side d-md-block" :class="hideOrShowList">
 
                 <!-- card profilo persolnale -->
                 <div class="card-element d-flex">
@@ -73,9 +73,10 @@
                             <div class="p-1 div-img-lista-contatti">
                                 <img :src="elemento.avatar" alt="">
                             </div>
-                            <div class="card-name py-2 div-nome-lista-contatti overflow-hidden" >
+                            <div class="card-name py-2 div-nome-lista-contatti overflow-hidden">
                                 <h6 class="ms-1 mb-0"><strong>{{elemento.name}}</strong></h6>
-                                <p v-if="lastElement(elemento.messages) !== undefined" class="c-gray ms-1 mb-0 my_fs_l">{{
+                                <p v-if="lastElement(elemento.messages) !== undefined" class="c-gray ms-1 mb-0 my_fs_l">
+                                    {{
                                     lastElement(elemento.messages).message }}</p>
                             </div>
                             <div class="icons text-end" style="width: 10%;">
@@ -93,13 +94,14 @@
             </div>
 
             <!-- CONTENITORE DI DESTRA -->
-            <div class="right-side d-md-block" :class="hideOrShowChat" >
+            <div class="right-side d-md-block" :class="hideOrShowChat">
 
                 <!-- card chat selezionata -->
                 <div class="card-element d-flex">
                     <template v-if="indexClicked !== ''">
                         <div class="picture p-1 text-center align-items-center div-img-chat-selezionata">
-                            <span @click="backToTheChat()" class="d-md-none"><i class=" fa-solid fa-caret-left"></i></span>
+                            <span @click="backToTheChat()" class="d-md-none"><i
+                                    class=" fa-solid fa-caret-left"></i></span>
                             <img :src="imgClicked" alt="">
                         </div>
                         <div class="card-name pt-2 div-nome-chat-selezionata">
@@ -121,29 +123,35 @@
                 <div class="chat-container overflow-auto p-5 position-relative">
 
                     <div v-if="indexClicked !== ''" class="text-center position-absolute top-0 start-50 ">
-                        <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">mer
-                            {{new Date().getDate()}} mag</span>
+                        <span style="--bs-bg-opacity: .5;" class="my_fs bg-light p-1 rounded">{{new
+                            Date().toLocaleString('default', { weekday: 'short' })}}
+                            {{new Date().getDate()}} {{new Date().toLocaleString('default', { month: 'long' })}}</span>
                     </div>
 
                     <!-- messaggi -->
                     <div v-if="indexClicked !== ''" v-for="persona,i in filtraContatti[indexClicked].messages"
                         class=" mb-2 row">
 
-                        <div  v-if="persona.status == 'sent'"
-                            @mouseover="deleteMsgSentVisibility=true"
+                        <div v-if="persona.status == 'sent'" @click="showDelete(i)"
                             class="position-relative bg-success p-2 rounded-start rounded-top col-6 offset-6 col-md-4 offset-md-8"
                             style="--bs-bg-opacity: .5;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                            <span  v-if="deleteMsgSentVisibility==true" class="deleteMsgRight rounded p-1 bg-light"><span @click="cancellaMsg(indexClicked, i)">elimina</span><br><span class="border-top" @click="deleteMsgSentVisibility=false">annulla</span></span>
+                            <span v-if="deleteMsgSentVisibility===i" class="deleteMsgRight rounded p-1 bg-light">
+                                <span @click="cancellaMsg(indexClicked, i)">elimina</span><br>
+                                <span class="border-top" @click="deleteMsgSentVisibility=false">annulla</span>
+                            </span>
                         </div>
 
-                        <div v-else="persona.status == 'recived'"
-                            @mouseover="deleteMsgRecivedVisibility=true" 
-                            class="position-relative bg-light p-2 rounded-end rounded-top col-6 col-md-4" style="--bs-bg-opacity: .6;">
+                        <div v-else="persona.status == 'recived'" @mouseover="deleteMsgRecivedVisibility=true"
+                            class="position-relative bg-light p-2 rounded-end rounded-top col-6 col-md-4"
+                            style="--bs-bg-opacity: .6;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                            <span v-if="deleteMsgRecivedVisibility==true" class="deleteMsgLeft rounded p-1 bg-light"><span @click="cancellaMsg(indexClicked, i)">elimina</span><br><span class="border-top" @click="deleteMsgRecivedVisibility=false">annulla</span></span>
+                            <span v-if="deleteMsgRecivedVisibility==true"
+                                class="deleteMsgLeft rounded p-1 bg-light"><span
+                                    @click="cancellaMsg(indexClicked, i)">elimina</span><br><span class="border-top"
+                                    @click="deleteMsgRecivedVisibility=false">annulla</span></span>
                         </div>
                     </div>
 
@@ -160,7 +168,7 @@
                                 <input style="width: 100%;" class="border border-0 form-control" type="search"
                                     placeholder="Scrivi un messaggio" aria-label="Search" v-model="messageInput">
                             </div>
-                            <div class="text-end microfon" >
+                            <div class="text-end microfon">
                                 <span><i @click="sendMessage()" v-if="messageInput!==''"
                                         class="p-1 mt-1 ms-1 fs-5 fa-regular fa-paper-plane"></i>
                                     <i @click="getCurrentTime()"
