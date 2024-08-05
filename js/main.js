@@ -176,20 +176,10 @@ createApp({
       rispostaSettata: {},
       hideOrShowList: '',
       hideOrShowChat: 'hide',
-      deleteMsgSentVisibility: null,
-      deleteMsgRecivedVisibility: null
 
     }
   },
   methods: {
-
-    showDelete(indice) {
-      if (this.deleteMsgSentVisibility == indice) {
-        this.deleteMsgSentVisibility
-      } else {
-        this.deleteMsgSentVisibility = indice
-      }
-    },
 
     backToTheChat() {
       this.hideOrShowList = ''
@@ -262,8 +252,6 @@ createApp({
         indice = 0
       }
       elemento.splice(indice, 1)
-      this.deleteMsgSentVisibility = false
-      this.deleteMsgRecivedVisibility = false
 
     }
   },

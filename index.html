@@ -10,9 +10,9 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://unpkg.com/vue@3.4.27/dist/vue.global.js"></script>
 </head>
@@ -132,26 +132,42 @@
                     <div v-if="indexClicked !== ''" v-for="persona,i in filtraContatti[indexClicked].messages"
                         class=" mb-2 row">
 
-                        <div v-if="persona.status == 'sent'" @click="showDelete(i)"
+                        <div v-if="persona.status == 'sent'"
                             class="position-relative bg-success p-2 rounded-start rounded-top col-6 offset-6 col-md-4 offset-md-8"
                             style="--bs-bg-opacity: .5;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                            <span v-if="deleteMsgSentVisibility===i" class="deleteMsgRight rounded p-1 bg-light">
-                                <span @click="cancellaMsg(indexClicked, i)">elimina</span><br>
-                                <span class="border-top" @click="deleteMsgSentVisibility=false">annulla</span>
+                            <span class="dropdown">
+                                <button class="btn dropdown-toggle p-0" type="button" id="dropdownMenu2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Message
+                                            Info</button></li>
+                                    <li><button class="dropdown-item" type="button"
+                                            @click="cancellaMsg(indexClicked, i)">Delete
+                                            Message</button></li>
+                                </ul>
                             </span>
                         </div>
 
-                        <div v-else="persona.status == 'recived'" @mouseover="deleteMsgRecivedVisibility=true"
+                        <div v-else="persona.status == 'recived'"
                             class="position-relative bg-light p-2 rounded-end rounded-top col-6 col-md-4"
                             style="--bs-bg-opacity: .6;">
                             {{persona.message}}
                             <div class="text-end my_fs">{{persona.date}}</div>
-                            <span v-if="deleteMsgRecivedVisibility==true"
-                                class="deleteMsgLeft rounded p-1 bg-light"><span
-                                    @click="cancellaMsg(indexClicked, i)">elimina</span><br><span class="border-top"
-                                    @click="deleteMsgRecivedVisibility=false">annulla</span></span>
+                            <span class="dropdown">
+                                <button class="btn dropdown-toggle p-0" type="button" id="dropdownMenu2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                    <li><button class="dropdown-item" type="button">Message
+                                            Info</button></li>
+                                    <li><button class="dropdown-item" type="button"
+                                            @click="cancellaMsg(indexClicked, i)">Delete
+                                            Message</button></li>
+                                </ul>
+                            </span>
                         </div>
                     </div>
 
